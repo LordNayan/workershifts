@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Prisma, Shift } from "@prisma/client";
-import { PrismaService } from "src/prisma/prisma.service";
+import { PrismaService } from "../prisma/prisma.service";
 import { CreateShiftDto } from "./dto/create-shift.dto";
 import { UpdateShiftDto } from "./dto/update-shift.dto";
 

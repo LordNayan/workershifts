@@ -33,7 +33,7 @@ model Worker {
 
 model Shift {
   id         String    @id @default(uuid())
-  worker     Worker?   @relation(fields: [workerId], references: [id])
+  worker     Worker?   @relation(fields: [workerId], references: [id], onDelete: Cascade)
   workerId   String
   type       ShiftType
   shiftDate  DateTime  @db.Date

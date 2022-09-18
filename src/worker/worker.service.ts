@@ -50,9 +50,6 @@ export class WorkerService {
 
   async remove(id: string) {
     try {
-      //   await this.prismaService.schedule.delete({
-      //     where: { workerId: id },
-      //   });
       const worker = await this.prismaService.worker.delete({
         where: { id },
       });

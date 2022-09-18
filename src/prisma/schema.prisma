@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider         = "prisma-client-js"
+  rejectOnNotFound = true
+  binaryTargets    = ["native", "darwin"]
+  previewFeatures  = ["interactiveTransactions"]
+}
+
+enum ShiftType {
+  Morning
+  MidDay
+  Evening
+}
+
+model Worker {
+  id             String     @id @default(uuid())
+  name           String
+  phoneNumber    String     @default("")
+  address        String     @default("")
+  Shift          Shift[]
+  created_at     DateTime   @default(now())
+  updated_at     DateTime?  @updatedAt
+
+  @@index([id])
+}
+
+model Shift {
+  id         String    @id @default(uuid())
+  worker     Worker?   @relation(fields: [workerId], references: [id])
+  workerId   String
+  type       ShiftType
+  shiftDate  DateTime  @db.Date
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+
+  @@unique([workerId, shiftDate], name: "workerId_shiftDate")
+  @@index([id])
+}

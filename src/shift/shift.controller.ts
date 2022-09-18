@@ -12,7 +12,9 @@ import {
 import { CreateShiftDto } from "./dto/create-shift.dto";
 import { UpdateShiftDto } from "./dto/update-shift.dto";
 import { Shift } from "@prisma/client";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Shift")
 @Controller("shift")
 export class ShiftController {
   @Inject(ShiftService)

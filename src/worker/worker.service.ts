@@ -36,13 +36,11 @@ export class WorkerService {
 
   async update(id: string, body: UpdateWorkerDto) {
     try {
-      await this.prismaService.worker.update({
+      const worker = await this.prismaService.worker.update({
         where: { id },
         data: body,
       });
-      return await this.prismaService.worker.findFirst({
-        where: { id },
-      });
+      return worker;
     } catch (error) {
       throw new HttpException("Worker not found", HttpStatus.NOT_FOUND);
     }
